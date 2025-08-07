@@ -1,0 +1,54 @@
+body {
+    max-width: 650px;
+    min-height: calc(100vh - 80px);
+    margin: 40px auto;
+    padding: 0 10px;
+    font: 18px/1.5 "Nunito Sans",
+        system-ui;
+    color: #839496;
+    background: linear-gradient(0deg, #eee8d5, #fdf6e3), url('resources/noise.svg');
+    background-blend-mode: soft-light;
+    text-align: center;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+em,
+strong {
+    color: #2aa198;
+}
+
+#profile-pic {
+    border-radius: 50%;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(180deg, #073642, #002b36),
+            url('resources/noise.svg');
+        background-blend-mode: hard-light;
+    }
+
+    em,
+    strong {
+        color: #2aa198;
+    }
+
+    a:link {
+        color: #eee8d5;
+    }
+
+    a:visited {
+        color: #fdf6e3;
+    }
+
+    input {
+        background: #073642;
+        color: #839496;
+        border: 1px solid #586e75;
+    }
+}
