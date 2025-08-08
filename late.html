@@ -19,9 +19,7 @@
 <body>
   <div id="error"></div>
   <h1 id="title">Loading...</h1>
-  <img id="profile-pic"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn6ulPC90ZXh0Pjwvc3ZnPg=="
-    alt="profile picture" width="240" height="240">
+  <img id="profile-pic" src="" alt="profile picture" width="240" height="240">
   <p id="details">Loading...</p>
 </body>
 
@@ -43,7 +41,7 @@
         let details;
         switch (data.live_status) {
           case "UNKNOWN":
-            title = `${data.channel_name} does not have any scheduled streams`
+            title = `${data.channel_name} does not have any scheduled streams within the next <strong>WEEK</strong>!`
             details = "She <strong>PROBABLY</strong> hates you!"
             break
           case "LIVE":
@@ -58,8 +56,8 @@
             title = `${data.channel_name} is <strong>LATE</strong> for her stream!`
             details = "She <strong>HATES</strong> you!"
           default:
-            title = `${data.channel_name} is doing... Something?`
-            details = "She <strong>PROBABLY</strong> still hates you!"
+            title = `${data.channel_name} is doing... <strong>SOMETHING</strong>?`
+            details = "We don't know what it is, but she <strong>PROBABLY</strong> still hates you!"
         }
         document.getElementById("title").innerHTML = title;
         document.getElementById("details").innerHTML = details;
@@ -70,6 +68,7 @@
         errorDiv.innerHTML = error;
         errorDiv.style.display = "block";
         console.log(error);
+        document.getElementById("profile-pic").setAttribute("src", "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn6ulPC90ZXh0Pjwvc3ZnPg==")
       });
   }
 </script>
