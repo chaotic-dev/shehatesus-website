@@ -22,6 +22,12 @@ strong {
     color: #2aa198;
 }
 
+#error {
+    display: none;
+    color: #dc322f;
+    font-weight: bold;
+}
+
 #profile-pic {
     border-radius: 50%;
 }
