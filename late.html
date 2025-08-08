@@ -26,7 +26,7 @@
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
-  fetch(`api.shehates.us/?${urlParams}`)
+  fetch(`https://api.shehates.us/?${urlParams}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
