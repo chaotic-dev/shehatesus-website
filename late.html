@@ -25,50 +25,52 @@
 </body>
 
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  fetch(`https://api.shehates.us/?${urlParams}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      if ("error" in data) {
-        throw new Error(`Server error: ${data.error}`);
-      }
-      let title;
-      let details;
-      switch (data.live_status) {
-        case "UNKNOWN":
-          title = `${data.channel_name} does not have any scheduled streams`
-          details = "She <strong>PROBABLY</strong> hates you!"
-          break
-        case "LIVE":
-          title = `${data.channel_name} is <strong>LIVE</strong> right now!`
-          details = "She <strong>LOVES</strong> you!"
-          break;
-        case "UPCOMING":
-          title = `${data.channel_name} has an <strong>UPCOMING</strong> stream and isn't late!`
-          details = "She <strong>PROBABLY</strong> loves you!"
-          break;
-        case "LATE":
-          title = `${data.channel_name} is <strong>LATE</strong> for her stream!`
-          details = "She <strong>HATES</strong> you!"
-        default:
-          title = `${data.channel_name} is doing... Something?`
-          details = "She <strong>PROBABLY</strong> still hates you!"
-      }
-      document.getElementById("title").innerHTML = title;
-      document.getElementById("details").innerHTML = details;
-      document.getElementById("profile-pic").setAttribute("src", data.profile_pic.url)
-    })
-    .catch(error => {
-      const errorDiv = document.getElementById("error");
-      errorDiv.innerHTML = error;
-      errorDiv.style.display = "block";
-      console.log(error);
-    });
+  window.onload = (event) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    fetch(`https://api.shehates.us/late?${urlParams}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if ("error" in data) {
+          throw new Error(`Server error: ${data.error}`);
+        }
+        let title;
+        let details;
+        switch (data.live_status) {
+          case "UNKNOWN":
+            title = `${data.channel_name} does not have any scheduled streams`
+            details = "She <strong>PROBABLY</strong> hates you!"
+            break
+          case "LIVE":
+            title = `${data.channel_name} is <strong>LIVE</strong> right now!`
+            details = "She <strong>LOVES</strong> you!"
+            break;
+          case "UPCOMING":
+            title = `${data.channel_name} has an <strong>UPCOMING</strong> stream and isn't late!`
+            details = "She <strong>PROBABLY</strong> loves you!"
+            break;
+          case "LATE":
+            title = `${data.channel_name} is <strong>LATE</strong> for her stream!`
+            details = "She <strong>HATES</strong> you!"
+          default:
+            title = `${data.channel_name} is doing... Something?`
+            details = "She <strong>PROBABLY</strong> still hates you!"
+        }
+        document.getElementById("title").innerHTML = title;
+        document.getElementById("details").innerHTML = details;
+        document.getElementById("profile-pic").setAttribute("src", data.profile_pic.url)
+      })
+      .catch(error => {
+        const errorDiv = document.getElementById("error");
+        errorDiv.innerHTML = error;
+        errorDiv.style.display = "block";
+        console.log(error);
+      });
+    }
 </script>
 
 </html>
