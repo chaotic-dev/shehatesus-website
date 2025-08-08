@@ -41,23 +41,26 @@
         let title;
         let details;
         switch (data.live_status) {
+          case "NO_SCHEDULE":
+            title = `<strong>${data.channel_name}</strong> does not have <strong>ANY</strong> scheduled streams!`
+            details = "She <strong>PROBABLY</strong> hates you!"
           case "UNKNOWN":
-            title = `${data.channel_name} does not have any scheduled streams within the next <strong>WEEK</strong>!`
+            title = `<strong>${data.channel_name}</strong> does not have any scheduled streams within the next <strong>WEEK</strong>!`
             details = "She <strong>PROBABLY</strong> hates you!"
             break
           case "LIVE":
-            title = `${data.channel_name} is <strong>LIVE</strong> right now!`
+            title = `<strong>${data.channel_name}</strong> is <strong>LIVE</strong> right now!`
             details = "She <strong>LOVES</strong> you!"
             break;
           case "UPCOMING":
-            title = `${data.channel_name} has an <strong>UPCOMING</strong> stream and isn't late!`
+            title = `<strong>${data.channel_name}</strong> has an <strong>UPCOMING</strong> stream and isn't late!`
             details = "She <strong>PROBABLY</strong> loves you!"
             break;
           case "LATE":
-            title = `${data.channel_name} is <strong>LATE</strong> for her stream!`
+            title = `<strong>${data.channel_name}</strong> is <strong>LATE</strong> for her stream!`
             details = "She <strong>HATES</strong> you!"
           default:
-            title = `${data.channel_name} is doing... <strong>SOMETHING</strong>?`
+            title = `<strong>${data.channel_name}</strong> is doing... <strong>SOMETHING</strong>?`
             details = "We don't know what it is, but she <strong>PROBABLY</strong> still hates you!"
         }
         document.getElementById("title").innerHTML = title;
