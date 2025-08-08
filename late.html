@@ -16,16 +16,20 @@
 
   <body>
     <h1 id="title">Loading...</h1>
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn6ulPC90ZXh0Pjwvc3ZnPg==" alt="profile picture" id="profile-pic">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn6ulPC90ZXh0Pjwvc3ZnPg==" alt="profile picture" id="profile-pic" width="240" height="240">
     <p id="details">Loading...</p>
   </body>
 
   <script>
     document.onload = () => {
       const title = document.getElementById("title");
-      title.innerHtml = "Testing";
+      title.innerHTML = "Testing";
+      const profile = document.getElementById("profile-pic");
+      profile.setAttribute("src", "https://yt3.ggpht.com/diUmYP_TigPwQp73EBiH5OsynlqbortkAHwOGOELhw66WiivSI5YHJHpNH7vO7nFPe8K0nh8OzA=s240-c-k-c0x00ffffff-no-rj")
       const details = document.getElementById("details");
-      details.innerHtml = "Testing";
+      details.innerHTML = "Testing";
+      const urlParams = new URLSearchParams(window.location.search);
+      console.log(urlParams.get("channel"));
     }
   </script>
 
