@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>She HATES Us</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Does your oshi HATE you? Find out here!">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn5KUPC90ZXh0Pjwvc3ZnPg==">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-        rel="stylesheet">
-  </head>
-  <body>
-    
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>She HATES Us</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon"
+    href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn5KUPC90ZXh0Pjwvc3ZnPg==">
+</head>
+
+<body>
+  <header>
+    <div><a href="https://github.com/chaotic-dev/">[Github]</a> <a href="https://x.com/Codetaku_">[X/Twitter]</a></div>
+    <div class="theme-toggle">
+      <span class="toggle-label">Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </header>
+  <div class="container">
     <h1>Does your oshi <strong>HATE</strong> you?</h1>
     <p>Is she even a <em>minute</em> late for stream? Find out here!</p>
-    <img src="resources/oshi.png" alt="UUUUUUuuuuuuuuuuuuuuuuuuuuuuuuu" width="240" height="240">
-    <form action="late.html" method="get">
-        <input type="text" name="channel" placeholder="Channel ID" required>
-        <button type="submit">Check</button>
+    <img id="uuuuu" src="resources/oshi.png" alt="UUUUUUuuuuuuuuuuuuuuuuuuuuuuuuu" width="240" height="240">
+    <form action="channel.html" method="GET">
+      <label for="channelId">Enter YouTube Channel ID, handle, or username:</label>
+      <input type="text" id="channel" name="channel" placeholder="e.g. @MintFantome" required />
+      <button type="submit">Check</button>
     </form>
-    <div><a href="https://github.com/chaotic-dev/">[Github]</a> <a href="https://x.com/Codetaku_">[X/Twitter]</a></div>
-  </body>
+  </div>
+  <script>
+    const switchInput = document.getElementById('themeSwitch');
+    const savedTheme = localStorage.getItem('theme');
+
+    // If no saved theme, use system preference
+    if (!savedTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = prefersDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', defaultTheme);
+      switchInput.checked = prefersDark;
+    } else {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      switchInput.checked = savedTheme === 'dark';
+    }
+
+    switchInput.addEventListener('change', function () {
+      const theme = this.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+  </script>
+
+</body>
+
 </html>

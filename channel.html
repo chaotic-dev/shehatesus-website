@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Does she HATE you?</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon"
+    href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn5KUPC90ZXh0Pjwvc3ZnPg==">
+</head>
+
+<body>
+  <header>
+    <div><a href="https://github.com/chaotic-dev/">[Github]</a> <a href="https://x.com/Codetaku_">[X/Twitter]</a></div>
+    <span id="error" style="display:none; color: red;"></span>
+    <div class="theme-toggle">
+      <span class="toggle-label">Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </header>
+  <div class="container">
+    <h1>Does she <strong>HATE</strong> you?</h1>
+    <div class="channel-card">
+      <img id="profile-pic" src="https://via.placeholder.com/150" alt="Channel Avatar" width="240" height="240" />
+      <h2 id="channel-name">[Channel Name]</h2>
+      <p><strong>Status:</strong> <span id='status'>[Looking up channel]</span></p>
+      <p><strong>Conclusion:</strong> <span id="conclusion">[Determining Hatefulness]</span></p>
+    </div>
+    <a href="index.html" class="back-link">Back to Search</a>
+  </div>
+
+  <script>
+    const switchInput = document.getElementById('themeSwitch');
+    const savedTheme = localStorage.getItem('theme');
+
+    // If no saved theme, use system preference
+    if (!savedTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = prefersDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', defaultTheme);
+      switchInput.checked = prefersDark;
+    } else {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      switchInput.checked = savedTheme === 'dark';
+    }
+
+    switchInput.addEventListener('change', function () {
+      const theme = this.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+
+    window.onload = (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      fetch(`https://api.shehates.us/late?${urlParams}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if ("error" in data) {
+            throw new Error(`Server error: ${data.error}`);
+          }
+          let status;
+          let conclusion;
+          switch (data.live_status) {
+            case "NO_SCHEDULE":
+              status = `<strong>${data.channel_name}</strong> does not have <strong>ANY</strong> scheduled streams!`
+              conclusion = "She <strong>PROBABLY</strong> hates you!"
+            case "UNKNOWN":
+              status = `<strong>${data.channel_name}</strong> does not have any scheduled streams within the next <strong>WEEK</strong>!`
+              conclusion = "She <strong>PROBABLY</strong> hates you!"
+              break
+            case "LIVE":
+              status = `<strong>${data.channel_name}</strong> is <strong>LIVE</strong> right now!`
+              conclusion = "She <strong>LOVES</strong> you!"
+              break;
+            case "UPCOMING":
+              status = `<strong>${data.channel_name}</strong> has an <strong>UPCOMING</strong> stream and isn't late!`
+              conclusion = "She <strong>PROBABLY</strong> loves you!"
+              break;
+            case "LATE":
+              status = `<strong>${data.channel_name}</strong> is <strong>LATE</strong> for her stream!`
+              conclusion = "She <strong>HATES</strong> you!"
+              break;
+            default:
+              status = `<strong>${data.channel_name}</strong> is doing... <strong>SOMETHING</strong>?`
+              conclusion = "We don't know what it is, but she <strong>PROBABLY</strong> still hates you!"
+          }
+          document.getElementById("channel-name").innerHTML = data.channel_name;
+          document.getElementById("status").innerHTML = status;
+          document.getElementById("conclusion").innerHTML = conclusion;
+          document.getElementById("profile-pic").setAttribute("src", data.profile_pic.url)
+        })
+        .catch(error => {
+          const errorDiv = document.getElementById("error");
+          errorDiv.innerHTML = error;
+          errorDiv.style.display = "block";
+          console.log(error);
+          document.getElementById("profile-pic").setAttribute("src", "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn6ulPC90ZXh0Pjwvc3ZnPg==")
+        });
+    }
+  </script>
+</body>
+
+</html>
