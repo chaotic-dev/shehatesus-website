@@ -25,7 +25,7 @@
   <div class="container">
     <h1>Does she <strong>HATE</strong> you?</h1>
     <div class="channel-card">
-      <img id="profile-pic" src="https://via.placeholder.com/150" alt="Channel Avatar" width="240" height="240" />
+      <img id="profile-pic" src="" alt="Channel Avatar" width="240" height="240" />
       <h2 id="channel-name">[Channel Name]</h2>
       <p><strong>Status:</strong> <span id='status'>[Looking up channel]</span></p>
       <p><strong>Conclusion:</strong> <span id="conclusion">[Determining Hatefulness]</span></p>
@@ -33,27 +33,8 @@
     <a href="index.html" class="back-link">Back to Search</a>
   </div>
 
-  <script>
-    const switchInput = document.getElementById('themeSwitch');
-    const savedTheme = localStorage.getItem('theme');
-
-    // If no saved theme, use system preference
-    if (!savedTheme) {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const defaultTheme = prefersDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', defaultTheme);
-      switchInput.checked = prefersDark;
-    } else {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      switchInput.checked = savedTheme === 'dark';
-    }
-
-    switchInput.addEventListener('change', function () {
-      const theme = this.checked ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-    });
-
+  <script src="theme.js"></script>
+  <script type="text/javascript">
     window.onload = (event) => {
       const urlParams = new URLSearchParams(window.location.search);
       fetch(`https://api.shehates.us/late?${urlParams}`)

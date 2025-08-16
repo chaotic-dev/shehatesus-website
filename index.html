@@ -31,27 +31,7 @@
       <button type="submit">Check</button>
     </form>
   </div>
-  <script>
-    const switchInput = document.getElementById('themeSwitch');
-    const savedTheme = localStorage.getItem('theme');
-
-    // If no saved theme, use system preference
-    if (!savedTheme) {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const defaultTheme = prefersDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', defaultTheme);
-      switchInput.checked = prefersDark;
-    } else {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      switchInput.checked = savedTheme === 'dark';
-    }
-
-    switchInput.addEventListener('change', function () {
-      const theme = this.checked ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-    });
-  </script>
+  <script src="theme.js"></script>
 
 </body>
 
